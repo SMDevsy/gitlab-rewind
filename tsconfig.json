@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib" : [
+      "dom"
+      "ES2020.Promise"
+    ],
+    "target": "ES2020"
+  }
+}
