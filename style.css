@@ -8,7 +8,7 @@
 }
 
 *{
-    --background: #444;
+    --background: #373737;
     --text-color: #fafafa;
     --gitlab-orange: #fd7e14; /*taken from gitlab color scheme*/
     margin: 0;
