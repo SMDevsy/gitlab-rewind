@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'helveticaregular';
+  src: url('fonts/helvetica-webfont.woff2') format('woff2'),
+       url('fonts/helvetica-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 *{
     --background: #444;
     --text-color: #fafafa;
