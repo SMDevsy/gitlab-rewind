@@ -10,7 +10,7 @@
 *{
     --background: #373737;
     --text-color: #fafafa;
-    --gitlab-orange: #fd7e14;
+    --gitlab-orange: #fd7e14; /*taken from gitlab color scheme*/
     margin: 0;
 }
 
@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-family: Helvetica, monospace;
+    font-family: 'helveticaregular', monospace;
     background-color: var(--background);
     color: var(--text-color);
     min-height: 100vh;
@@ -29,7 +29,7 @@
 #title{
     font-size: 4rem;
     margin: 0.5rem 0;
-    color: var(--gitlab-orange); /*taken from gitlab color scheme*/
+    color: var(--gitlab-orange);
 }
 
 .gradient-text{
