@@ -1,94 +1,163 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-exports.__esModule = true;
-require("node-fetch");
+const per_page = 100
+
+function getDefaultSearchParams() {
+  return {
+    per_page: per_page,
+    page: 1,
+    after: getLowerDateBoundary()
+  }
+}
+
 function getLowerDateBoundary() {
-    var today = new Date();
-    var yearAgoStr = new Date(today
-        .setFullYear(today.getFullYear() - 1))
-        .toISOString()
-        .slice(0, 10);
-    return yearAgoStr;
+  let today = new Date()
+  let yearAgoStr = new Date(today
+    .setFullYear(today.getFullYear() - 1))
+    .toISOString()
+    .slice(0, 10)
+  return yearAgoStr
 }
-function fetchIssueData(url) {
-    return __awaiter(this, void 0, void 0, function () {
-        var fetchedData;
-        return __generator(this, function (_a) {
-            console.log("Querying ".concat(url, " for Issue data"));
-            fetchedData = [];
-            return [2 /*return*/, fetch(url, {
-                    method: "GET"
-                })
-                    .then(function (res) {
-                    if (res.ok) {
-                        console.log("fetchIssueData: Success");
-                    }
-                    else {
-                        console.log("fetchIssueData: Failure");
-                    }
-                })["catch"](function (error) { return console.log("Error: ".concat(error)); })];
-        });
-    });
+
+// custom params: object
+async function fetchYearlyData(url, customParams) {
+  let yearlyData = []
+  let ob = Object.assign(getDefaultSearchParams(), customParams)
+  while (true) {
+    const finalUrl = url + new URLSearchParams(ob).toString()
+    const response = await fetch(finalUrl)
+    const data = await response.json()
+    yearlyData.push(...data)
+    if (data.length < per_page) { break }
+    ob.page++
+  }
+  return yearlyData
 }
-function getUserData(username) {
-    return __awaiter(this, void 0, void 0, function () {
-        var apiUrl, searchParamsObject, searchParams, result;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    apiUrl = "https://gitlab.com/api/v4/users/".concat(username, "/events?");
-                    searchParamsObject = {
-                        per_page: "10"
-                    };
-                    searchParams = new URLSearchParams(searchParamsObject).toString();
-                    return [4 /*yield*/, Promise.allSettled([
-                            fetchIssueData(apiUrl + searchParams)
-                        ])];
-                case 1:
-                    result = _a.sent();
-                    console.log(result);
-                    return [2 /*return*/];
-            }
-        });
-    });
+
+/* returns an object containing two values:
+   openedIssues: integer
+   closedIssues: integer
+*/
+async function fetchIssueData(url) {
+  const customSearchParams = {
+    target_type: "issue",
+  }
+  console.log(`Querying for Issue data`)
+  const yearlyData = await fetchYearlyData(url, customSearchParams)
+  const result = yearlyData.reduce((r, o) => {
+    r[o.action_name === "opened" ? 'openedIssues' : 'closedIssues']++;
+    return r;
+  }, { openedIssues: 0, closedIssues: 0 });
+
+  return result;
 }
+
+/*
+  returns an object containing info about a project
+  name: string
+  description: string
+  avatar_url: string
+  star_count: integer
+  languages: object
+  web_url: string
+ */
+async function fetchRepositoryData(projectID) {
+  const url = `https://gitlab.com/api/v4/projects/${projectID}/`
+  console.log(`Querying for Project data`)
+  const project = await fetch(url).then((data) => data.json())
+  return {
+    name: project.name,
+    description: project.description,
+    avatar_url: project.avatar_url,
+    star_count: project.star_count,
+    languages: await fetchProjectLanguage(projectID),
+    web_url: project.web_url
+  }
+}
+
+async function fetchProjectLanguage(projectID) {
+  const url = `https://gitlab.com/api/v4/projects/${projectID}/languages`
+  return await fetch(url).then((data) => data.json())
+}
+
+/*
+  returns an object containing info about user's commits:
+  mostUsedLanguage: string
+  numberOfPushes: integer
+  numberOfCommits: integer
+  numberOfProjectsCommitedTo: integer
+  longestCommitMessage: string
+  shortestCommitMessage: string
+ */
+async function fetchCommitData(url) {
+  const customSearchParams = {
+    action: "pushed",
+  }
+  console.log(`Querying for Commit data`)
+  let data = await fetchYearlyData(url, customSearchParams)
+  data = data.filter((event) => event.action_name == "pushed to")
+
+  let result = {
+    numberOfPushes: data.length, // done
+    numberOfCommits: 0, // done
+    longestCommitMessage: "",
+    shortestCommitMessage: "",
+    projectMostPushedTo: {
+      name: "",
+      languages: {},
+      numberOfPushes: 0,
+      numberOfCommits: 0
+    }
+  }
+
+  let projectPushCounts = new Map()
+  let maxCommitMessageLen = 0
+  let minCommitMessageLen = Infinity
+
+  for (let event of data) {
+    result.numberOfCommits += event.push_data.commit_count
+
+    if (!projectPushCounts.has(event.project_id))
+      projectPushCounts.set(event.project_id, { pushes: 1, commits: event.push_data.commit_count })
+    else
+      projectPushCounts.set(event.project_id,
+        {
+          pushes: projectPushCounts.get(event.project_id).pushes + 1,
+          commits: projectPushCounts.get(event.project_id).commits + event.push_data.commit_count
+        })
+
+    if (event.push_data.commit_title == null) continue
+
+    if (event.push_data.commit_title.length < minCommitMessageLen) {
+      minCommitMessageLen = event.push_data.commit_title.length
+      result.shortestCommitMessage = event.push_data.commit_title
+    }
+
+    if (event.push_data.commit_title.length > maxCommitMessageLen) {
+      maxCommitMessageLen = event.push_data.commit_title.length
+      result.longestCommitMessage = event.push_data.commit_title
+    }
+  }
+  const mapSort1 = new Map([...projectPushCounts.entries()].sort((a, b) => b[1].pushes - a[1].pushes));
+  let favoriteProject = new Array(...mapSort1.entries())[0]
+  let favoriteProjectID = favoriteProject[0]
+
+  result.projectMostPushedTo = await fetchRepositoryData(favoriteProjectID)
+  result.projectMostPushedTo = Object.assign(result.projectMostPushedTo, {pushes: favoriteProject[1].pushes ,commits: favoriteProject[1].commits })
+  
+  result.numberOfProjectsPushedTo = projectPushCounts.size
+  return result
+}
+
+async function getUserData(username) {
+  const apiUrl = `https://gitlab.com/api/v4/users/${username}/events?`
+  const [issueData, commitData] = await Promise.allSettled([
+    await fetchIssueData(apiUrl),
+    await fetchCommitData(apiUrl),
+  ])
+
+  console.log(issueData.value)
+  console.log(commitData.value)
+}
+
 function main() {
-    getLowerDateBoundary();
-    getUserData("mmilek");
+  getUserData("mmilek")
 }
-main();

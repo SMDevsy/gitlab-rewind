@@ -8,12 +8,8 @@
 pages:
   stage: deploy
   script:
-  - npm install -g typescript 
-  - npm install
-  - tsc src/*.ts
   - mkdir .public
   - cp -r * .public
-  - rm -f .public/*.ts
   - mv .public public
   artifacts:
     paths:
