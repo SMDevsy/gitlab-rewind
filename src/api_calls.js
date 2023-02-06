@@ -161,4 +161,3 @@ async function getUserData(username) {
 function main() {
   getUserData("mmilek")
 }
-
