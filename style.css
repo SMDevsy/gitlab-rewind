@@ -9,7 +9,8 @@
 *{
     --background: #444;
     --text-color: #fafafa;
-    --gitlab-orange: #fd7e14;
+    --name-color: #8c8c8c;
+    --gitlab-orange: #fd7e14; /*taken from gitlab color scheme*/
     margin: 0;
 }
 
@@ -22,51 +23,62 @@
     font-family: Helvetica, monospace;
     background-color: var(--background);
     color: var(--text-color);
-    min-height: 100vh;
+    min-height: calc(100vh - 2rem);
+    padding-bottom: 2rem;
 }
 
 #title{
-    font-size: 4rem;
+    font-size: 8rem;
     margin: 0.5rem 0;
-    color: var(--gitlab-orange); /*taken from gitlab color scheme*/
+    color: var(--gitlab-orange);
+    text-align: center;
 }
 
 .gradient-text{
     background-image: linear-gradient(90deg, var(--gitlab-orange), red);
     background-clip: text;
+    -webkit-background-clip: text;
     color:transparent;
 }
 
 #subtitle{
-    margin: 0.5rem 0;
+    font-size: 2rem;
+    margin: 1rem 0;
 }
 
 #input{
-    margin: 1rem 0;
-    padding: 0.5rem 2rem;
+    margin: 2rem 0;
+    padding: 0.5rem 0rem;
+    min-width: 18rem;
     border-radius: 10px;
     text-align: center;
+    transform: scale(1.8);
+    border-color: var(--gitlab-orange);
+    background-color: var(--background);
+    color: var(--gitlab-orange);
 }
 
 #submit {
     margin: 0.5rem 0 0 0;
     align-items: center;
     appearance: none;
-    background-color: #FCFCFD;
+    background-color: var(--gitlab-orange);
     border-radius: 10px;
     border-width: 0;
-    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+      var(--gitlab-orange) 0 -3px 0 inset;
     box-sizing: border-box;
-    color: #36395A;
+    color: var(--background);
     cursor: pointer;
     display: inline-flex;
-    height: 48px;
+    height: 4rem;
     justify-content: center;
     line-height: 1;
     list-style: none;
     overflow: hidden;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
     text-align: left;
     text-decoration: none;
@@ -76,30 +88,36 @@
     touch-action: manipulation;
     white-space: nowrap;
     will-change: box-shadow,transform;
-    font-size: 18px;
+    font-size: 2rem;
 }
 
 #submit:focus {
-    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    box-shadow: var(--gitlab-orange) 0 0 0 1.5px inset,
+     rgba(45, 35, 66, 0.4) 0 2px 4px,
+     rgba(45, 35, 66, 0.3) 0 7px 13px -3px, 
+     var(--gitlab-orange) 0 -3px 0 inset;
 }
 
 #submit:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-    transform: translateY(-2px);
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+    var(--gitlab-orange) 0 -3px 0 inset;
+    transform: translateY(-4px);
 }
 
 #submit:active {
-    box-shadow: #D6D6E7 0 3px 7px inset;
-    transform: translateY(2px);
+    box-shadow: var(--gitlab-orange) 0 3px 7px inset;
+    transform: translateY(4px);
 }
 
 footer{
     position: absolute;
     bottom: 5px;
+    color: var(--name-color);
 }
 
 a{
-    color: var(--text-color);
+    color: var(--name-color);
     text-decoration: none;
 }
 
@@ -114,7 +132,7 @@ a.left:before {
     height: 1px;  
     bottom: 0;  
     left: 0;  
-    background-color: var(--text-color);  
+    background-color: var(--name-color);  
     visibility: hidden;  
     transition: all 0.3s ease-in-out;
 }
