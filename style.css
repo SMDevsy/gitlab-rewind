@@ -15,16 +15,17 @@
 }
 
 #flexbox{
+    overflow-x: hidden;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     font-family: 'helveticaregular', monospace;
     background-color: var(--background);
     color: var(--text-color);
-    min-height: calc(100vh - 2rem);
+    min-height: calc(80vh - 2rem);
     padding-bottom: 2rem;
+    padding-top: 20vh;
 }
 
 #title{
@@ -32,10 +33,11 @@
     margin: 0.5rem 0;
     color: var(--gitlab-orange);
     text-align: center;
+    animation: fadeInFromBelow 1.0s forwards;
 }
 
 .gradient-text{
-    background-image: linear-gradient(90deg, var(--gitlab-orange), red);
+    background-image: linear-gradient(180deg, var(--gitlab-orange), red);
     background-clip: text;
     -webkit-background-clip: text;
     color:transparent;
@@ -44,6 +46,7 @@
 #subtitle{
     font-size: 2rem;
     margin: 1rem 0;
+    animation: fadeInFromLeft 1.0s forwards;
 }
 
 #input{
@@ -56,6 +59,7 @@
     border-color: var(--gitlab-orange);
     background-color: var(--background);
     color: var(--gitlab-orange);
+    transition: 500ms;
 }
 
 #submit {
@@ -140,4 +144,28 @@ a.left:before {
 a.left:hover:before {  
   visibility: visible;  
   width: 100%;
+}
+
+@keyframes fadeInFromBelow{
+    from {
+	transform: translateY(25%);
+	opacity: 0.1;
+	color: var(--gitlab-orange);
+    }
+    to {
+	transform: translateY(0);
+	opacity: 1.0;
+    }
+}
+
+
+@keyframes fadeInFromLeft{
+    from{
+	transform: translateX(-25%);
+	opacity: 0.1;
+    }
+    to{
+	transform: translateX(0);
+	opacity: 1.0;
+    }
 }
