@@ -153,11 +153,13 @@ async function getUserData(username) {
     await fetchIssueData(apiUrl),
     await fetchCommitData(apiUrl),
   ])
-
-  console.log(issueData.value)
-  console.log(commitData.value)
+  return {
+    issueData: issueData.value,
+    commitData: commitData.value
+  }
 }
 
 function main() {
-  getUserData("mmilek")
+  let res = getUserData("mmilek")
+  console.log(res)
 }
