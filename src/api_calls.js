@@ -159,7 +159,14 @@ async function getUserData(username) {
   }
 }
 
+function getUserName(){
+  let name = document.getElementById("input").value
+  console.log(name)
+  document.getElementById("input").value = ""
+  return name
+}
+
 function main() {
-  let res = getUserData("mmilek")
+  let res = getUserData(getUserName())
   console.log(res)
 }
