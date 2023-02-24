@@ -166,7 +166,19 @@ function getUserName(){
   return name
 }
 
-function main() {
-  let res = getUserData(getUserName())
+function displayLoader(){
+  let loader = document.getElementById("loader").style.display = "flex";
+  console.log(loader)
+}
+
+function hideLoader(){
+  let loader = document.getElementById("loader").style.display = "none";
+  console.log(loader)
+}
+
+async function main() {
+  displayLoader()
+  let res = await getUserData(getUserName())
+  hideLoader()
   console.log(res)
 }
