@@ -166,19 +166,20 @@ function getUserName(){
   return name
 }
 
-function displayLoader(){
-  let loader = document.getElementById("loader").style.display = "flex";
-  console.log(loader)
+function createLoader(){
+  let loader = document.createElement("div")
+  loader.id = "loader"
+  document.getElementById("flexbox").appendChild(loader)
+  loader.style.display = "flex"
 }
 
-function hideLoader(){
-  let loader = document.getElementById("loader").style.display = "none";
-  console.log(loader)
+function destroyLoader(){
+  document.getElementById("loader").remove()
 }
 
 async function main() {
-  displayLoader()
+  createLoader()
   let res = await getUserData(getUserName())
-  hideLoader()
+  destroyLoader()
   console.log(res)
 }
