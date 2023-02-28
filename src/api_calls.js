@@ -166,10 +166,22 @@ function getUserName(){
   return name
 }
 
+function createStatsDiv(){
+  let statsDiv = document.createElement("div")
+  statsDiv.id = "stats-div"
+  document.getElementById("flexbox").appendChild(statsDiv)
+}
+
+function destroyStatsDiv(){
+  if (document.getElementById("stats-div") != null){
+    document.getElementById("stats-div").remove()
+  }
+}
+
 function createLoader(){
   let loader = document.createElement("div")
   loader.id = "loader"
-  document.getElementById("flexbox").appendChild(loader)
+  document.getElementById("stats-div").appendChild(loader)
   loader.style.display = "flex"
 }
 
@@ -177,9 +189,16 @@ function destroyLoader(){
   document.getElementById("loader").remove()
 }
 
-async function main() {
+function showStats(stats){
+  let statsDiv = document.getElementById("stats-div")
+}
+
+async function main(){
+  destroyStatsDiv()
+  createStatsDiv()
   createLoader()
   let res = await getUserData(getUserName())
   destroyLoader()
+  showStats(res)
   console.log(res)
 }

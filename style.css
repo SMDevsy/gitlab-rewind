@@ -12,6 +12,7 @@
     --name-color: #8c8c8c;
     --gitlab-orange: #fd7e14; /*taken from gitlab color scheme*/
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 #flexbox{
@@ -106,7 +107,7 @@
     font-size: 2rem;
 }
 
-#submit:focus {
+button#submit:focus {
     box-shadow: var(--gitlab-orange) 0 0 0 1.5px inset,
      rgba(45, 35, 66, 0.4) 0 2px 4px,
      rgba(45, 35, 66, 0.3) 0 7px 13px -3px, 
@@ -155,6 +156,14 @@ a.left:before {
 a.left:hover:before {  
   visibility: visible;  
   width: 100%;
+}
+
+#stats-div{
+    width: 100vw;
+    height: calc(100vh - 2rem);
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes fadeInFromBelow{
