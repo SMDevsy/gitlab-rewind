@@ -189,8 +189,16 @@ function destroyLoader(){
   document.getElementById("loader").remove()
 }
 
+function createStat(description, stat, animation){
+  let div = document.createElement("div")
+  div.innerHTML = description + " : " + stat
+  div.style.animation = animation;
+  return div
+}
+
 function showStats(stats){
   let statsDiv = document.getElementById("stats-div")
+  statsDiv.appendChild(createStat("number of commits", stats.commitData.numberOfCommits, "fadeInFromBelow 2s forwards"))
 }
 
 async function main(){
