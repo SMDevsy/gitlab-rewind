@@ -191,14 +191,65 @@ function destroyLoader(){
 
 function createStat(description, stat, animation){
   let div = document.createElement("div")
-  div.innerHTML = description + " : " + stat
-  div.style.animation = animation;
+  div.className = "stats"
+  div.innerHTML = description + ": " + stat
+  div.style.animation = animation
   return div
+}
+
+function createLink(description, stat,animation){
+  let div = document.createElement("div")
+  div.className = "stats"
+  div.innerHTML = description + ": "
+  let link = document.createElement("a")
+  link.href = stat
+  link.target = "_blank"
+  link.innerHTML = stat
+  div.appendChild(link)
+  div.style.animation = animation
+  return div
+}
+
+function createImage(stat, animation){
+  let div = document.createElement("div")
+  div.className = "stats"
+  let img = document.createElement("img")
+  img.src = stat
+  img.alt = "project avatar"
+  img.height = 100
+  img.width = 100
+  div.style.animation = animation
+  div.appendChild(img)
+  return div
+}
+
+function createObjectStat(description, stat, animation){
+  let div = document.createElement("div")
+  div.className = "stats"
+  
+  div.innerHTML = description + ": " + JSON.stringify(stat, null, 4).slice(1,-1)
+  div.style.animation = animation
+  return div 
 }
 
 function showStats(stats){
   let statsDiv = document.getElementById("stats-div")
   statsDiv.appendChild(createStat("number of commits", stats.commitData.numberOfCommits, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("number of pushes", stats.commitData.numberOfPushes, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("longest commit message", stats.commitData.longestCommitMessage, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("shortest commit message", stats.commitData.shortestCommitMessage, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("number of open issues", stats.issueData.openedIssues, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("number of closed issues", stats.issueData.closedIssues, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("number of projects you commited to", stats.commitData.numberOfProjectsPushedTo, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("Your most commited project", stats.commitData.projectMostPushedTo.name, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createImage(stats.commitData.projectMostPushedTo.avatar_url, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createLink("check it out at", stats.commitData.projectMostPushedTo.web_url, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("description", stats.commitData.projectMostPushedTo.description, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("number of commits", stats.commitData.projectMostPushedTo.commits, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("number of pushes", stats.commitData.projectMostPushedTo.pushes, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createObjectStat("used languages", stats.commitData.projectMostPushedTo.languages, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("StarTrak", stats.commitData.projectMostPushedTo.star_count, "fadeInFromBelow 2s forwards"))
+
 }
 
 async function main(){
