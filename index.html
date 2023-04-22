@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico">
     <script defer src="src/random_quote.js"></script>
-    <script src="src/api_calls.js"></script>
+    <script defer type="module" src="src/main.js"></script>
   </head>
   
   <body>
@@ -17,7 +17,7 @@
       <h2 id="subtitle">Are you commiting? Let us find out.</h2>
       <input type="text" placeholder="Your GitLab username" id="input" minlength="1">
       <a href="#stats-div">
-	<button id="submit" onclick="main()">Submit</button>
+	<button id="submit">Submit</button>
       </a>
       <footer>
         <b>
