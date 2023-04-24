@@ -1,3 +1,5 @@
+import {colorPaletes,randomColorPalete} from "./random_palete.js";
+
 function getUserName(){
   let name = document.getElementById("input").value
   document.getElementById("input").value = ""
@@ -32,6 +34,7 @@ function createStat(prefix, stat,sufix, animation){
   let prefixDiv = document.createElement("div")
   let statDiv = document.createElement("div")
   let sufixDiv = document.createElement("div")
+  mainDiv = randomColorPalete(mainDiv, colorPaletes)
   mainDiv.classList.add("stats")
   mainDiv.style.animation = animation
   prefixDiv.classList.add("prefix")
