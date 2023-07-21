@@ -1,5 +1,9 @@
 import {colorPaletes,randomColorPalete} from "./random_palete.js";
 
+function isNumber(stat){
+  return !isNaN(stat)
+}
+
 function getUserName(){
   let name = document.getElementById("input").value
   document.getElementById("input").value = ""
@@ -41,6 +45,9 @@ function createStat(prefix, stat,sufix, animation){
   prefixDiv.innerHTML = prefix
   statDiv.classList.add("stat")
   statDiv.innerHTML = stat
+  if (isNumber(statDiv.innerHTML)) {
+    statDiv.style.fontSize = "2.5rem"
+  }
   sufixDiv.classList.add("sufix")
   sufixDiv.innerHTML = sufix
   mainDiv.append(prefixDiv, statDiv, sufixDiv)
@@ -48,17 +55,17 @@ function createStat(prefix, stat,sufix, animation){
   
 }
 
-// function createLink(description, stat,animation){
-//   let div = document.createElement("div")
-//   div.innerHTML = description + ": "
-//   let link = document.createElement("a")
-//   link.href = stat
-//   link.target = "_blank"
-//   link.innerHTML = stat
-//   div.appendChild(link)
-//   div.style.animation = animation
-//   return div
-// }
+function createLink(description, stat,animation){
+  let div = document.createElement("div")
+  div.innerHTML = description + ": "
+  let link = document.createElement("a")
+  link.href = stat
+  link.target = "_blank"
+  link.innerHTML = stat
+  div.appendChild(link)
+  div.style.animation = animation
+  return div
+}
 
 // function createImage(stat, animation){
 //   let div = document.createElement("div")
@@ -85,8 +92,8 @@ function showStats(stats){
   let statsDiv = document.getElementById("stats-div")
   statsDiv.appendChild(createStat("You have made", stats.commitData.numberOfCommits, "commits", "fadeIntoLeft 1s forwards"))
   statsDiv.appendChild(createStat("That amount to", stats.commitData.numberOfPushes, "pushes", "fadeIntoRight 2s forwards"))
-  // statsDiv.appendChild(createStat("longest commit message", stats.commitData.longestCommitMessage, "fadeInFromBelow 2s forwards"))
-  // statsDiv.appendChild(createStat("shortest commit message", stats.commitData.shortestCommitMessage, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("This...", stats.commitData.longestCommitMessage,"...is your longest commit message", "fadeInFromBelow 3s forwards"))
+  statsDiv.appendChild(createStat("On the other hand...", stats.commitData.shortestCommitMessage,"...this is your shortest commit message", "fadeInFromBelow 4s forwards"))
   // statsDiv.appendChild(createStat("number of open issues", stats.issueData.openedIssues, "fadeInFromBelow 2s forwards"))
   // statsDiv.appendChild(createStat("number of closed issues", stats.issueData.closedIssues, "fadeInFromBelow 2s forwards"))
   // statsDiv.appendChild(createStat("number of projects you commited to", stats.commitData.numberOfProjectsPushedTo, "fadeInFromBelow 2s forwards"))
