@@ -26,7 +26,6 @@ function createLoader(){
   let loader = document.createElement("div")
   loader.id = "loader"
   document.getElementById("stats-div").appendChild(loader)
-  loader.style.display = "flex"
 }
 
 function destroyLoader(){

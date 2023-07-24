@@ -29,16 +29,6 @@
     padding-top: 20vh;
 }
 
-#loader{
-    display:flex;
-    height: 30vh;
-    aspect-ratio: 1 / 1;
-    background-size: contain;
-    background-image: url("./spinner-icon-12086.png");
-    
-    animation: rotation 2.0s infinite;
-}
-
 #title{
     font-size: 8rem;
     margin: 0.5rem 0;
@@ -125,44 +115,23 @@ button#submit:focus {
     transform: translateY(4px);
 }
 
-footer{
+#loader{
+    display:flex;
+    height: 30vh;
+    aspect-ratio: 1 / 1;
+    background-size: contain;
+    background-image: url("./spinner-icon-12086.png");
     position: absolute;
-    bottom: 5px;
-    color: var(--name-color);
+    top: calc(150vh - 30vh);
+    animation: rotation 2.0s infinite;
 }
 
-a{
-    color: var(--name-color);
-    text-decoration: none;
-}
-
-a.left{    
-    position: relative;
-}
-
-a.left:before {  
-    content: "";
-    position: absolute;  
-    width: 0;  
-    height: 1px;  
-    bottom: 0;  
-    left: 0;  
-    background-color: var(--name-color);  
-    visibility: hidden;  
-    transition: all 0.3s ease-in-out;
-}
-
-a.left:hover:before {  
-  visibility: visible;  
-  width: 100%;
-}
 
 #stats-div{
     padding-top: 2rem;
-    width: 100vw;
-    height: calc(100vh - 2rem);
+    width: 90vw;
+    height: calc(100vh + 2rem);
     display:flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     font-size: 1.3rem;
@@ -202,6 +171,38 @@ a.left:hover:before {
     text-align: end;
     font-size: 1.5rem;
     grid-area: 3 / 2 / 4 / 4;
+}
+
+footer{
+    position: absolute;
+    bottom: 5px;
+    color: var(--name-color);
+}
+
+a{
+    color: var(--name-color);
+    text-decoration: none;
+}
+
+a.left{    
+    position: relative;
+}
+
+a.left:before {  
+    content: "";
+    position: absolute;  
+    width: 0;  
+    height: 1px;  
+    bottom: 0;  
+    left: 0;  
+    background-color: var(--name-color);  
+    visibility: hidden;  
+    transition: all 0.3s ease-in-out;
+}
+
+a.left:hover:before {  
+  visibility: visible;  
+  width: 100%;
 }
 
 @keyframes fadeInFromBelow{
