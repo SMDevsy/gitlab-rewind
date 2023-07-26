@@ -21,7 +21,6 @@ function randomColorPalete(div, colorPaletes) {
     colorPaletes[idx].backgroundColors[0] + ", " + 
     colorPaletes[idx].backgroundColors[1] + ", " + 
     colorPaletes[idx].backgroundColors[2] + ")";
-  console.log(div.style.background)
   return div
 }
 

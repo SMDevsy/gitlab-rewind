@@ -122,15 +122,14 @@ button#submit:focus {
     background-size: contain;
     background-image: url("./spinner-icon-12086.png");
     position: absolute;
-    top: calc(150vh - 30vh);
+    bottom: 50vh;
     animation: rotation 2.0s infinite;
 }
-
 
 #stats-div{
     padding-top: 2rem;
     width: 90vw;
-    height: calc(100vh + 2rem);
+    min-height: calc(100vh + 2rem);
     display:flex;
     align-items: center;
     flex-direction: column;
@@ -261,3 +260,18 @@ a.left:hover:before {
 	opacity: 1.0;
     }
 }
+
+
+
+@keyframes fadeInFromAbove{
+    from {
+	transform: translateY(-25%);
+	opacity: 0.1;
+	color: var(--gitlab-orange);
+    }
+    to {
+	transform: translateY(0);
+	opacity: 1.0;
+    }
+}
+

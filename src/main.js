@@ -12,3 +12,8 @@ async function main(){
 }
 
 document.getElementById("submit").addEventListener("click", main)
+document.getElementById("input").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    document.getElementById("submit").click()
+  }
+})
