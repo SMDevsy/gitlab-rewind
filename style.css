@@ -145,11 +145,11 @@ button#submit:focus {
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    margin: 10px 0;
+    margin: 15px 0;
     font-family: 'helveticaregular', monospace;
     background-color: white;
     color: black;
-    padding: 20px;
+    padding: 30px;
     border-radius: 20px;
 }
 
@@ -171,6 +171,13 @@ button#submit:focus {
     text-align: end;
     font-size: 1.5rem;
     grid-area: 3 / 2 / 4 / 4;
+}
+
+.languages{
+    white-space: pre-line;
+    font-size: 1.8rem;
+    text-align: left;
+    grid-area: 2 / 1 / 2 / 4;
 }
 
 .avatar{

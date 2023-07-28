@@ -63,7 +63,11 @@ function createAvatar(avatar, link, description, animation) {
   mainDiv.classList.add("stats")
   mainDiv.style.animation = animation
   avatarImg.classList.add("avatar")
-  avatarImg.src = avatar
+  if (typeof(avatar) === "object"){
+    avatarImg.src = "../avatar.jpg"
+  } else {
+    avatarImg.src = avatar
+  }
   avatarImg.alt = "project avatar"
   avatarImg.style.height = "100px"
   avatarImg.style.aspectRatio = "1 / 1"
@@ -82,13 +86,31 @@ function createAvatar(avatar, link, description, animation) {
   return mainDiv
 }
 
-// function createObjectStat(description, stat, animation){
-//   let div = document.createElement("div")
-//   //div.className = "stats"
-//   div.innerHTML = (description + ": " + JSON.stringify(stat, null, 4).slice(1,-1)).split("\n")
-//   div.style.animation = animation
-//   return div 
-// }
+function parseLanguages(stat) {
+  let string = []
+  Object.entries(stat).forEach((e) => {
+    string.push(e.toString().split(",").join(": ") + "%")
+  })
+  return string.join("\n")
+}
+
+function createObjectStat(prefix, stat, sufix, animation){
+  let mainDiv = document.createElement("div")
+  let prefixDiv = document.createElement("div")
+  let statDiv = document.createElement("div")
+  let sufixDiv = document.createElement("div")
+  mainDiv = randomColorPalete(mainDiv, colorPaletes)
+  mainDiv.classList.add("stats")
+  mainDiv.style.animation = animation
+  prefixDiv.innerHTML = prefix
+  prefixDiv.classList.add("prefix")
+  statDiv.innerHTML = parseLanguages(stat)
+  statDiv.classList.add("languages")
+  sufixDiv.innerHTML = sufix
+  sufixDiv.classList.add("sufix")
+  mainDiv.append(prefixDiv, statDiv, sufixDiv)
+  return mainDiv
+}
 
 function showStats(stats){
   let statsDiv = document.getElementById("stats-div")
@@ -105,7 +127,7 @@ function showStats(stats){
 				    stats.commitData.projectMostPushedTo.description, "fadeInFromBelow 2s forwards"))
   statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoLeft 2s forwards"))
   statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoRight 2s forwards"))
-  // statsDiv.appendChild(createObjectStat("used languages", stats.commitData.projectMostPushedTo.languages, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createObjectStat("Languages", stats.commitData.projectMostPushedTo.languages, "you used", "fadeInFromBelow 2s forwards"))
   statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromAbove 2s forwards"))
 }
 
