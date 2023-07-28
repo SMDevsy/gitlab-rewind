@@ -62,13 +62,19 @@ function createAvatar(avatar, link, description, animation) {
   mainDiv = randomColorPalete(mainDiv, colorPaletes)
   mainDiv.classList.add("stats")
   mainDiv.style.animation = animation
-  anchorDiv.href = link
+  avatarImg.classList.add("avatar")
   avatarImg.src = avatar
   avatarImg.alt = "project avatar"
   avatarImg.style.height = "100px"
   avatarImg.style.aspectRatio = "1 / 1"
+  anchorDiv.style.height = "100px"
+  anchorDiv.href = link
   anchorDiv.style.gridArea = "1 / 2 / 3 / 3"
+  if (description.length === 0) {
+    descriptionDiv.innerHTML = "no description?"
+  } else {
   descriptionDiv.innerHTML = description
+  }
   descriptionDiv.style.gridArea = "4 / 1 / 4 / 4"
   descriptionDiv.style.textAlign = "center"
   anchorDiv.append(avatarImg)
@@ -79,7 +85,7 @@ function createAvatar(avatar, link, description, animation) {
 // function createObjectStat(description, stat, animation){
 //   let div = document.createElement("div")
 //   //div.className = "stats"
-//   div.innerHTML = description + ": " + JSON.stringify(stat, null, 4).slice(1,-1)
+//   div.innerHTML = (description + ": " + JSON.stringify(stat, null, 4).slice(1,-1)).split("\n")
 //   div.style.animation = animation
 //   return div 
 // }
@@ -93,14 +99,14 @@ function showStats(stats){
   statsDiv.appendChild(createStat("This shows how much", stats.issueData.openedIssues, "of your issues are open" , "fadeIntoRight 2s forwards"))
   statsDiv.appendChild(createStat("And this shows how much", stats.issueData.closedIssues, "issues you have closed" , "fadeIntoLeft 2s forwards"))
   statsDiv.appendChild(createStat("You have pushed to", stats.commitData.numberOfProjectsPushedTo, "projects", "fadeInFromBelow 2s forwards"))
-  statsDiv.appendChild(createStat("And now", "Your most commited project","here are the stats", "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("And now, for your", "Most commited project","here are the stats", "fadeInFromBelow 2s forwards"))
   statsDiv.appendChild(createStat("You have commited the most", stats.commitData.projectMostPushedTo.name, "to this project", "fadeInFromAbove 2s forwards"))
   statsDiv.appendChild(createAvatar(stats.commitData.projectMostPushedTo.avatar_url, stats.commitData.projectMostPushedTo.web_url,
 				    stats.commitData.projectMostPushedTo.description, "fadeInFromBelow 2s forwards"))
-  // statsDiv.appendChild(createStat("number of commits", stats.commitData.projectMostPushedTo.commits, "fadeInFromBelow 2s forwards"))
-  // statsDiv.appendChild(createStat("number of pushes", stats.commitData.projectMostPushedTo.pushes, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoLeft 2s forwards"))
+  statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoRight 2s forwards"))
   // statsDiv.appendChild(createObjectStat("used languages", stats.commitData.projectMostPushedTo.languages, "fadeInFromBelow 2s forwards"))
-  // statsDiv.appendChild(createStat("StarTrak", stats.commitData.projectMostPushedTo.star_count, "fadeInFromBelow 2s forwards"))
+  statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromAbove 2s forwards"))
 }
 
 export {destroyStatsDiv, createStatsDiv, createLoader, getUserName, destroyLoader, showStats}

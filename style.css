@@ -11,6 +11,7 @@
     --text-color: #fafafa;
     --name-color: #8c8c8c;
     --gitlab-orange: #fd7e14; /*taken from gitlab color scheme*/
+    --gold-color: #ffd700;
     margin: 0;
     scroll-behavior: smooth;
 }
@@ -170,6 +171,15 @@ button#submit:focus {
     text-align: end;
     font-size: 1.5rem;
     grid-area: 3 / 2 / 4 / 4;
+}
+
+.avatar{
+    transition: transform .4s;
+}
+
+.avatar:hover{
+    box-shadow: 0px 0px 60px 10px var(--gold-color);
+    transform: scale(1.2);
 }
 
 footer{
