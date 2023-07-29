@@ -12,7 +12,6 @@ function random_quote(quotes){
   let idx = Math.floor(Math.random() * quotes.length);
   let subtitle = document.getElementById('subtitle');
   subtitle.innerHTML = quotes[idx];
-  console.log(subtitle);
 }
 
 random_quote(quotes);

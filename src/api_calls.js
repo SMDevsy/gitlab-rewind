@@ -159,27 +159,4 @@ async function getUserData(username) {
   }
 }
 
-function getUserName(){
-  let name = document.getElementById("input").value
-  console.log(name)
-  document.getElementById("input").value = ""
-  return name
-}
-
-function createLoader(){
-  let loader = document.createElement("div")
-  loader.id = "loader"
-  document.getElementById("flexbox").appendChild(loader)
-  loader.style.display = "flex"
-}
-
-function destroyLoader(){
-  document.getElementById("loader").remove()
-}
-
-async function main() {
-  createLoader()
-  let res = await getUserData(getUserName())
-  destroyLoader()
-  console.log(res)
-}
+export {getUserData}

@@ -11,7 +11,9 @@
     --text-color: #fafafa;
     --name-color: #8c8c8c;
     --gitlab-orange: #fd7e14; /*taken from gitlab color scheme*/
+    --gold-color: #ffd700;
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 #flexbox{
@@ -26,17 +28,6 @@
     min-height: calc(80vh - 2rem);
     padding-bottom: 2rem;
     padding-top: 20vh;
-}
-
-#loader{
-    display:flex;
-    height: 30vh;
-    aspect-ratio: 1 / 1;
-    background-size: contain;
-    background-image: url("./spinner-icon-12086.png");
-    align-items: center;
-    justify-content: center;
-    animation: rotation 2.0s infinite;
 }
 
 #title{
@@ -106,7 +97,7 @@
     font-size: 2rem;
 }
 
-#submit:focus {
+button#submit:focus {
     box-shadow: var(--gitlab-orange) 0 0 0 1.5px inset,
      rgba(45, 35, 66, 0.4) 0 2px 4px,
      rgba(45, 35, 66, 0.3) 0 7px 13px -3px, 
@@ -123,6 +114,79 @@
 #submit:active {
     box-shadow: var(--gitlab-orange) 0 3px 7px inset;
     transform: translateY(4px);
+}
+
+#loader{
+    display:flex;
+    height: 30vh;
+    aspect-ratio: 1 / 1;
+    background-size: contain;
+    background-image: url("./spinner-icon-12086.png");
+    position: absolute;
+    bottom: 50vh;
+    animation: rotation 2.0s infinite;
+}
+
+#stats-div{
+    padding-top: 2rem;
+    width: 90vw;
+    min-height: calc(100vh + 2rem);
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.3rem;
+}
+
+.stats{
+    height: fit-content;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    margin: 15px 0;
+    font-family: 'helveticaregular', monospace;
+    background-color: white;
+    color: black;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.prefix{
+    font-size: 1.5rem;
+    grid-area: 1 / 1 / 1 / 3;
+}
+
+.stat{
+    font-size: 1.8rem;
+    text-align: center;
+    grid-area: 2 / 1 / 2 / 4;
+}
+
+.sufix{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    text-align: end;
+    font-size: 1.5rem;
+    grid-area: 3 / 2 / 4 / 4;
+}
+
+.languages{
+    white-space: pre-line;
+    font-size: 1.8rem;
+    text-align: left;
+    grid-area: 2 / 1 / 2 / 4;
+}
+
+.avatar{
+    transition: transform .4s;
+}
+
+.avatar:hover{
+    box-shadow: 0px 0px 60px 10px var(--gold-color);
+    transform: scale(1.2);
 }
 
 footer{
@@ -189,3 +253,42 @@ a.left:hover:before {
 	transform: rotate(359deg);
     }
 }
+
+
+@keyframes fadeIntoLeft{
+    from{
+	transform: translateX(0);
+	opacity: 0.1;
+    }
+    to{
+	transform: translateX(-25%);
+	opacity: 1.0;
+    }
+}
+
+
+@keyframes fadeIntoRight{
+    from{
+	transform: translateX(0);
+	opacity: 0.1;
+    }
+    to{
+	transform: translateX(25%);
+	opacity: 1.0;
+    }
+}
+
+
+
+@keyframes fadeInFromAbove{
+    from {
+	transform: translateY(-25%);
+	opacity: 0.1;
+	color: var(--gitlab-orange);
+    }
+    to {
+	transform: translateY(0);
+	opacity: 1.0;
+    }
+}
+
