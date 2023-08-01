@@ -121,7 +121,7 @@ button#submit:focus {
     height: 30vh;
     aspect-ratio: 1 / 1;
     background-size: contain;
-    background-image: url("./spinner-icon-12086.png");
+    background-image: url("./img/spinner-icon-12086.png");
     position: absolute;
     bottom: 50vh;
     animation: rotation 2.0s infinite;
@@ -233,7 +233,6 @@ a.left:hover:before {
     }
 }
 
-
 @keyframes fadeInFromLeft{
     from{
 	transform: translateX(-25%);
@@ -254,7 +253,6 @@ a.left:hover:before {
     }
 }
 
-
 @keyframes fadeIntoLeft{
     from{
 	transform: translateX(0);
@@ -266,7 +264,6 @@ a.left:hover:before {
     }
 }
 
-
 @keyframes fadeIntoRight{
     from{
 	transform: translateX(0);
@@ -277,8 +274,6 @@ a.left:hover:before {
 	opacity: 1.0;
     }
 }
-
-
 
 @keyframes fadeInFromAbove{
     from {
