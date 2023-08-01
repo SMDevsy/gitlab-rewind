@@ -64,7 +64,7 @@ function createAvatar(avatar, link, description, animation) {
   mainDiv.style.animation = animation
   avatarImg.classList.add("avatar")
   if (typeof(avatar) === "object"){
-    avatarImg.src = "../img/avatar.jpg"
+    avatarImg.src = "./img/avatar.jpg"
   } else {
     avatarImg.src = avatar
   }
