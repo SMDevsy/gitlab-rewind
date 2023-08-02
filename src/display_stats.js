@@ -1,4 +1,3 @@
-import { animateStats } from "./animations.js";
 import {colorPaletes,randomColorPalete} from "./random_palete.js";
 
 function isNumber(stat){
@@ -122,6 +121,14 @@ function addAnimationDelay(divs){
   })
 }
 
+function addScroll(divs){
+  divs.forEach((e) => {
+    e.addEventListener("animationstart", function() {
+      e.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+    })
+  })
+}
+
 function showStats(stats){
   const statsDiv = document.getElementById("stats-div")
   statsDiv.appendChild(createStat("You have made", stats.commitData.numberOfCommits, "commits", "fadeIntoLeft 1.5s forwards"))
@@ -135,11 +142,13 @@ function showStats(stats){
   statsDiv.appendChild(createStat("You have commited the most", stats.commitData.projectMostPushedTo.name, "to this project", "fadeInFromAbove 1.5s forwards"))
   statsDiv.appendChild(createAvatar(stats.commitData.projectMostPushedTo.avatar_url, stats.commitData.projectMostPushedTo.web_url,
 				    stats.commitData.projectMostPushedTo.description, "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoLeft 1.5s forwards"))
-  statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoRight 1.5s forwards"))
-  statsDiv.appendChild(createObjectStat("Languages", stats.commitData.projectMostPushedTo.languages, "you used", "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromAbove 1.5s forwards"))
-  addAnimationDelay(document.querySelectorAll('.stats'))
+  statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoRight 1.5s forwards"))
+  statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoLeft 1.5s forwards"))
+  statsDiv.appendChild(createObjectStat("Theses are", stats.commitData.projectMostPushedTo.languages, "the used languages", "fadeInFromAbove 1.5s forwards"))
+  statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromBelow 1.5s forwards"))
+  let statsDivs = document.querySelectorAll('.stats')
+  addAnimationDelay(statsDivs)
+  addScroll(statsDivs)
 }
 
 export {destroyStatsDiv, createStatsDiv, createLoader, getUserName, destroyLoader, showStats}
