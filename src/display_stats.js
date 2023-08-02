@@ -1,3 +1,4 @@
+import { animateStats } from "./animations.js";
 import {colorPaletes,randomColorPalete} from "./random_palete.js";
 
 function isNumber(stat){
@@ -39,7 +40,7 @@ function createStat(prefix, stat,sufix, animation){
   let sufixDiv = document.createElement("div")
   mainDiv = randomColorPalete(mainDiv, colorPaletes)
   mainDiv.classList.add("stats")
-  mainDiv.style.animation = animation
+  // mainDiv.style.animation = animation
   prefixDiv.classList.add("prefix")
   prefixDiv.innerHTML = prefix
   statDiv.classList.add("stat")
@@ -88,8 +89,9 @@ function createAvatar(avatar, link, description, animation) {
 
 function parseLanguages(stat) {
   let string = []
+  //add non-breaking space for better Windows browsers display
   Object.entries(stat).forEach((e) => {
-    string.push(e.toString().split(",").join(": ") + "%")
+    string.push(e.toString().split(",").join(":&nbsp") + "%")
   })
   return string.join("\n")
 }
@@ -113,7 +115,7 @@ function createObjectStat(prefix, stat, sufix, animation){
 }
 
 function showStats(stats){
-  let statsDiv = document.getElementById("stats-div")
+  const statsDiv = document.getElementById("stats-div")
   statsDiv.appendChild(createStat("You have made", stats.commitData.numberOfCommits, "commits", "fadeIntoLeft 1s forwards"))
   statsDiv.appendChild(createStat("That amount to", stats.commitData.numberOfPushes, "pushes", "fadeIntoRight 2s forwards"))
   statsDiv.appendChild(createStat("This", stats.commitData.longestCommitMessage,"is your longest commit message", "fadeInFromBelow 2s forwards"))
@@ -129,6 +131,7 @@ function showStats(stats){
   statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoRight 2s forwards"))
   statsDiv.appendChild(createObjectStat("Languages", stats.commitData.projectMostPushedTo.languages, "you used", "fadeInFromBelow 2s forwards"))
   statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromAbove 2s forwards"))
+  animateStats()
 }
 
 export {destroyStatsDiv, createStatsDiv, createLoader, getUserName, destroyLoader, showStats}

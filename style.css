@@ -225,7 +225,6 @@ a.left:hover:before {
     from {
 	transform: translateY(25%);
 	opacity: 0.1;
-	color: var(--gitlab-orange);
     }
     to {
 	transform: translateY(0);
@@ -279,7 +278,6 @@ a.left:hover:before {
     from {
 	transform: translateY(-25%);
 	opacity: 0.1;
-	color: var(--gitlab-orange);
     }
     to {
 	transform: translateY(0);
