@@ -151,6 +151,7 @@ button#submit:focus {
     color: black;
     padding: 30px;
     border-radius: 20px;
+    opacity: 0;
 }
 
 .prefix{
