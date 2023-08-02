@@ -116,6 +116,22 @@ button#submit:focus {
     transform: translateY(4px);
 }
 
+#top-button{
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 80px;
+    aspect-ratio: 1 / 1;
+    background-size: contain;
+    background-image: url("./img/up_arrow.png");
+    background-color: transparent;
+}
+
 #loader{
     display:flex;
     height: 30vh;
@@ -151,6 +167,7 @@ button#submit:focus {
     color: black;
     padding: 30px;
     border-radius: 20px;
+    opacity: 0;
 }
 
 .prefix{
@@ -225,7 +242,6 @@ a.left:hover:before {
     from {
 	transform: translateY(25%);
 	opacity: 0.1;
-	color: var(--gitlab-orange);
     }
     to {
 	transform: translateY(0);
@@ -279,7 +295,6 @@ a.left:hover:before {
     from {
 	transform: translateY(-25%);
 	opacity: 0.1;
-	color: var(--gitlab-orange);
     }
     to {
 	transform: translateY(0);
