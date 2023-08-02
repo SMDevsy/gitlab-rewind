@@ -1,5 +1,7 @@
 import {colorPaletes,randomColorPalete} from "./random_palete.js";
 
+const animationTimer = 2.5
+
 function isNumber(stat){
   return !isNaN(stat)
 }
@@ -116,8 +118,7 @@ function createObjectStat(prefix, stat, sufix, animation){
 // 1.5s because thats how long the animations takes to finish
 function addAnimationDelay(divs){
   divs.forEach((e,i) => {
-    e.style.animationDelay = 1.5 * i + "s"
-    console.log("delay:", e.style.animationDelay, i, 1.5 * i)
+    e.style.animationDelay = animationTimer * i + "s"
   })
 }
 
@@ -131,21 +132,21 @@ function addScroll(divs){
 
 function showStats(stats){
   const statsDiv = document.getElementById("stats-div")
-  statsDiv.appendChild(createStat("You have made", stats.commitData.numberOfCommits, "commits", "fadeIntoLeft 1.5s forwards"))
-  statsDiv.appendChild(createStat("That amount to", stats.commitData.numberOfPushes, "pushes", "fadeIntoRight 1.5s forwards"))
-  statsDiv.appendChild(createStat("This", stats.commitData.longestCommitMessage,"is your longest commit message", "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("On the other hand", stats.commitData.shortestCommitMessage,"this is your shortest commit message", "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("This shows how much", stats.issueData.openedIssues, "of your issues are open" , "fadeIntoRight 1.5s forwards"))
-  statsDiv.appendChild(createStat("And this shows how much", stats.issueData.closedIssues, "issues you have closed" , "fadeIntoLeft 1.5s forwards"))
-  statsDiv.appendChild(createStat("You have pushed to", stats.commitData.numberOfProjectsPushedTo, "projects", "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("And now, for your", "Most commited project","here are the stats", "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("You have commited the most", stats.commitData.projectMostPushedTo.name, "to this project", "fadeInFromAbove 1.5s forwards"))
+  statsDiv.appendChild(createStat("You have made", stats.commitData.numberOfCommits, "commits", "fadeIntoLeft "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("That amount to", stats.commitData.numberOfPushes, "pushes", "fadeIntoRight "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("This", stats.commitData.longestCommitMessage,"is your longest commit message", "fadeInFromBelow "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("On the other hand", stats.commitData.shortestCommitMessage,"this is your shortest commit message", "fadeInFromBelow "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("This shows how much", stats.issueData.openedIssues, "of your issues are open" , "fadeIntoRight "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("And this shows how much", stats.issueData.closedIssues, "issues you have closed" , "fadeIntoLeft "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("You have pushed to", stats.commitData.numberOfProjectsPushedTo, "projects", "fadeInFromBelow "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("And now, for your", "Most commited project","here are the stats", "fadeInFromBelow "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("You have commited the most", stats.commitData.projectMostPushedTo.name, "to this project", "fadeInFromAbove "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createAvatar(stats.commitData.projectMostPushedTo.avatar_url, stats.commitData.projectMostPushedTo.web_url,
-				    stats.commitData.projectMostPushedTo.description, "fadeInFromBelow 1.5s forwards"))
-  statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoRight 1.5s forwards"))
-  statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoLeft 1.5s forwards"))
-  statsDiv.appendChild(createObjectStat("Theses are", stats.commitData.projectMostPushedTo.languages, "the used languages", "fadeInFromAbove 1.5s forwards"))
-  statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromBelow 1.5s forwards"))
+				    stats.commitData.projectMostPushedTo.description, "fadeInFromBelow "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoRight "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoLeft "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createObjectStat("Theses are", stats.commitData.projectMostPushedTo.languages, "the used languages", "fadeInFromAbove "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromBelow "+ animationTimer +"s forwards"))
   let statsDivs = document.querySelectorAll('.stats')
   addAnimationDelay(statsDivs)
   addScroll(statsDivs)
