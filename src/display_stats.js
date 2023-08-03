@@ -47,7 +47,7 @@ function createStat(prefix, stat,sufix, animation){
   statDiv.classList.add("stat")
   statDiv.innerHTML = stat
   if (isNumber(statDiv.innerHTML)) {
-    statDiv.style.fontSize = "2.5rem"
+    statDiv.style.fontSize = "3rem"
   }
   sufixDiv.classList.add("sufix")
   sufixDiv.innerHTML = sufix
@@ -65,15 +65,16 @@ function createAvatar(avatar, link, description, animation) {
   mainDiv.classList.add("stats")
   mainDiv.style.animation = animation
   avatarImg.classList.add("avatar")
+  console.log(typeof(avatar))
   if (typeof(avatar) === "object"){
     avatarImg.src = "./img/avatar.jpg"
   } else {
     avatarImg.src = avatar
   }
   avatarImg.alt = "project avatar"
-  avatarImg.style.height = "100px"
+  avatarImg.style.height = "150px"
   avatarImg.style.aspectRatio = "1 / 1"
-  anchorDiv.style.height = "100px"
+  anchorDiv.style.height = "150px"
   anchorDiv.href = link
   anchorDiv.style.gridArea = "1 / 2 / 3 / 3"
   if (description.length === 0) {
@@ -83,6 +84,7 @@ function createAvatar(avatar, link, description, animation) {
   }
   descriptionDiv.style.gridArea = "4 / 1 / 4 / 4"
   descriptionDiv.style.textAlign = "center"
+  descriptionDiv.style.fontSize = "2.0rem"
   anchorDiv.append(avatarImg)
   mainDiv.append(anchorDiv, descriptionDiv, descriptionDiv)
   return mainDiv
@@ -136,16 +138,16 @@ function showStats(stats){
   statsDiv.appendChild(createStat("That amount to", stats.commitData.numberOfPushes, "pushes", "fadeIntoRight "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("This", stats.commitData.longestCommitMessage,"is your longest commit message", "fadeInFromBelow "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("On the other hand", stats.commitData.shortestCommitMessage,"this is your shortest commit message", "fadeInFromBelow "+ animationTimer +"s forwards"))
-  statsDiv.appendChild(createStat("This shows how much", stats.issueData.openedIssues, "of your issues are open" , "fadeIntoRight "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("This shows how much", stats.issueData.openedIssues, "issues you have ever opened" , "fadeIntoRight "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("And this shows how much", stats.issueData.closedIssues, "issues you have closed" , "fadeIntoLeft "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("You have pushed to", stats.commitData.numberOfProjectsPushedTo, "projects", "fadeInFromBelow "+ animationTimer +"s forwards"))
-  statsDiv.appendChild(createStat("And now, for your", "Most commited project","here are the stats", "fadeInFromBelow "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createStat("", "These are your most commited project stats","", "fadeInFromBelow "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("You have commited the most", stats.commitData.projectMostPushedTo.name, "to this project", "fadeInFromAbove "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createAvatar(stats.commitData.projectMostPushedTo.avatar_url, stats.commitData.projectMostPushedTo.web_url,
 				    stats.commitData.projectMostPushedTo.description, "fadeInFromBelow "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("Your project has", stats.commitData.projectMostPushedTo.commits, "that many commits", "fadeIntoRight "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("And that many", stats.commitData.projectMostPushedTo.pushes,"pushes", "fadeIntoLeft "+ animationTimer +"s forwards"))
-  statsDiv.appendChild(createObjectStat("Theses are", stats.commitData.projectMostPushedTo.languages, "the used languages", "fadeInFromAbove "+ animationTimer +"s forwards"))
+  statsDiv.appendChild(createObjectStat("These are", stats.commitData.projectMostPushedTo.languages, "the used languages", "fadeInFromAbove "+ animationTimer +"s forwards"))
   statsDiv.appendChild(createStat("This many people", stats.commitData.projectMostPushedTo.star_count, "starred your project", "fadeInFromBelow "+ animationTimer +"s forwards"))
   let statsDivs = document.querySelectorAll('.stats')
   addAnimationDelay(statsDivs)
